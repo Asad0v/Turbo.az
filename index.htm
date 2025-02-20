@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turbo az</title>
+    <link rel="stylesheet" href="output.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+        <div class=" container py-2 flex justify-between text-gray-500 gap-[10px]">
+            <ul id="sites" class="flex gap-[10px] text-xs md:text-md lg:text-lg  lg:w-[200px] overflow-x-scroll md:overflow-x-visible  sm:w-[120px]">
+                <a target="_blank" href="https://tap.az/"><li class="hover:text-red-500">Tap.az</li></a>
+                <a target="_blank" href="https://bina.az/"><li class="hover:text-red-500">Bina.az</li></a>
+                <a target="_blank" href="https://boss.az/"><li class="hover:text-red-500">Boss.az</li></a>
+            </ul>
+            <ul class="flex items-center gap-[20px] text-xs md:text-md lg:text-[15px]">
+                <li class="hover:text-red-500 hidden md:block ">Dəstək: (012) 505-77-55</li>
+                <li class="hover:text-red-500">Yardım</li>
+                <li class="hover:text-red-500">
+                    <select name="" id="">
+                        <option>RU</option>
+                        <option>AZ</option>
+                        <option>EN</option>
+                    </select>
+                </li>
+                <li  class="hover:text-red-500"> <i class="fa-solid fa-heart"></i> Seçilmişlər</li>
+                <li class="hover:text-red-500"><i class="fa-solid fa-user"></i> Giriş</li>
+            </ul>
+        </div>
+        
+            <header class="p-2 bg-red-700   ">
+                <div class="container flex justify-between h-16 mx-auto">
+                    <ul class="items-stretch hidden space-x-3 lg:flex gap-5 text-white text-xs md:text-md lg:text-base whitespace-nowrap ">
+                        <a onclick="printCards()" href="" class="py-5 uppercase text-2xl font-bold "><li >Turbo.az</li></a>
+                        <li class="py-6"><a class="hover:text-red-200" href="">Bütün elanlar</a></li>
+                        <li class="py-6"><a class="hover:text-red-200" href="">Avtosalonlar</a></li>
+                        <li class="py-6"><a class="hover:text-red-200" href="">Moto</a></li>
+                        <li class="py-6"><a class="hover:text-red-200" href="">Ehtiyyat hissələr və aksesuarlar</a></li>
+                    </ul>
+                    
+                    <div class="flex items-center md:space-x-4 gap-2">
+                        <div class="relative">
+                            <!-- <div class=" dark:bg-gray-100 dark:text-gray-800  rounded-md  "> -->
+                                <input id="inp" oninput="printFilter()" type="search" name="Search" placeholder="Search..." class="w-[60px] py-2 pl-4 text-sm rounded-md sm:w-[80px] xl:w-[120px] focus:outline-none dark:bg-gray-100 dark:text-gray-800 ">
+                                <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
+                            <!-- </div> -->
+                        </div>
+                        <button  type="button" class="hidden px-3 md:h-[100px]  lg:h-[50px] font-semibold rounded lg:block dark:bg-lime-500 dark:text-gray-50 text-[.9em] ">+ Yeni elan</button>
+                        <i onclick="openBasket(true)" class="fa-solid fa-basket-shopping text-2xl text-white cursor-pointer"></i>
+                    </div>
+                    <button onclick="handleToggler(true)" title="Open menu" type="button" class="p-4 lg:hidden">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6 dark:text-gray-800">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div id="basket" class="h-screen bg-red-700 w-[30vw] fixed z-50 top-[105px] right-[-30vw] transition-all  duration-500">
+                    <i onclick="openBasket(false)" class="fa-solid fa-x text-white p-5 text-2xl cursor-pointer"></i>
+                    
+                </div> <!--sbaijb-->
+                <div id="navbartoggler" class="h-screen bg-black w-[30vw] fixed z-50 top-0 right-[-30vw] transition-all  duration-500">
+                    <i onclick="handleToggler(false)" class="fa-solid fa-x text-white p-5 text-2xl"></i>
+                    <ul class="w-[100%] text-white sm:text-sm md:text-xl lg:text-2xl"> 
+                        <li class="text-center "><a href="index.htm" class="py-5 px-2 uppercase  font-bold  text-red-900">Turbo.az</a></li>
+                        <li class="p-2 md:p-4  "><a  href="">Bütün elanlar</a></li>
+                        <li class="p-2 md:p-4  "><a  href="">Avtosalonlar</a></li>
+                        <li class="p-2 md:p-4  "><a  href="">Moto</a></li>
+                        <li class="p-2 md:p-4  "><a  href="">Ehtiyyat hissələr və aksesuarlar</a></li>
+                    </ul>
+                </div>
+            </header>
+            <main class="p-3">
+                <select class="bg-white border-2 rounded-md "  onchange="markaFilter()"  id="automarka">
+                    dwsed
+                </select>
+                <div id="cards"  class=" flex justify-center items-center container flex-wrap gap-[20px]">
+                    
+                </div>
+            </main>
+
+            <script src="main.js"></script>
+</body>
+</html>
