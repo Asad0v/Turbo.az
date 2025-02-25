@@ -4,6 +4,7 @@ const basket = document.querySelector('#basket');
 const cards = document.querySelector('#cards');
 const inp = document.querySelector('#inp');
 const automarka = document.querySelector('#automarka');
+const totalamount = document.querySelector('#totalamount');
 const heart = document.querySelectorAll('.heart')
 function handleToggler(status) {
     navbartoggler.style.right = status ? '0' : '-30vw'
@@ -62,33 +63,67 @@ function printCards() {
     cards.innerHTML = kod
 }
 printCards()
+let umumiqiymet = 0
 const basketArr = []
 const shoppingList = document.getElementById('shoppingList')
 function buy(id) {
-    const obj = arr.find(item => item.id == id)
-    basketArr.push(obj)
-    console.log(basketArr);
-    
-    shoppingList.innerHTML = ""
+        const obj = arr.find(item => item.id == id)
+        const product = basketArr.find(item => item.id == id)
 
-   basketArr.forEach(item => shoppingList.innerHTML +=`
-		<li class="flex flex-col py-6 sm:flex-row sm:justify-between">
-			<div class="flex w-full space-x-2 sm:space-x-4">
-				<img class="flex-shrink-0 object-cover w-20 h-20 dark:border- rounded outline-none sm:w-32 sm:h-32 dark:bg-gray-500" src="${item.img}" alt="Polaroid camera">
+        if(!product){
+            basketArr.push({...obj, count:1})
+        }else product.count += 1
+        console.log(basketArr);
+        
+        printBasket()
+    
+            
+}
+function removeShopCard(id){
+    
+     const index = basketArr.findIndex(item => item.id == id)
+     basketArr.splice(index, 1)
+     printBasket()
+
+    
+}
+
+function handleCount(x,id) {
+    const product = basketArr.find(item => item.id == id)
+    if(product.count > 1 && x == -1 || x == 1)     product.count += x
+    printBasket()
+}
+
+function printBasket(){
+    const total = basketArr.reduce((acc, item) => {return acc + Number(item.qiymet.replace(/\s/g, '')) * item.count}, 0) 
+            totalamount.innerHTML = `${total} AZN`
+
+    shoppingList.innerHTML = ""
+    
+    basketArr.forEach(item =>
+    shoppingList.innerHTML +=`
+		<div class="flex flex-col py-6 sm:flex-row sm:justify-between">
+			<div class="flex w-full space-x-2 sm:space-x-4 p-5 bg-red-400">
+				<img class="flex-shrink-0 object-cover w-20 h-20 rounded-xl outline-none sm:w-32 sm:h-32 dark:bg-gray-500" src="${item.img}" alt="Polaroid camera">
 				<div class="flex flex-col justify-between w-full pb-4">
 					<div class="flex justify-between w-full pb-2 space-x-2">
 						<div class="space-y-1">
 							<h3 class="text-lg font-semibold leading-snug sm:pr-8">${item.marka} ${item.model}</h3>
-							<p class="text-sm dark:text-gray-600">${item.il}, ${item.mator}, <span style=" color: ${item.reng};">${item.reng}</p>
+							<p class="text-sm dark:text-white">${item.il}, ${item.mator}, <span style=" color: ${item.reng};">${item.reng}</p>
 						</div>
 						<div class="text-right">
 							<p class="text-lg font-semibold">${item.qiymet} AZN</p>
-							<p class="text-sm line-through dark:text-gray-400">Endirime ehtiyac yoxdu endirimli qiymetdide ele</p>
-						</div>
+							<p class="text-md  dark:text-blue-700">${Number(item.qiymet.replace(/\s/g, '')) * item.count}</p>
+						</div> 
 					</div>
+                    <div class=" flex gap-1 items-center">
+                        <button onclick="handleCount(-1,${item.id})" class=" px-2 p-1 rounded-md border-[2px] border-white  bg-red-500">-</button>
+                            <span>${item.count}</span>  
+                        <button onclick="handleCount(1,${item.id})" class=" px-2 p-1 rounded-md border-[2px] border-white  bg-red-500">+</button>
+                    </div>
 					<div class="flex text-sm divide-x">
-						<button type="button" class="flex items-center px-2 py-1 pl-0 space-x-1">
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-4 h-4 fill-current">
+						<button  onclick="removeShopCard(${item.id})" type="button" class="flex items-center px-2 py-1 pl-0 space-x-1">
+							<svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-4 h-4 fill-current">
 								<path d="M96,472a23.82,23.82,0,0,0,23.579,24H392.421A23.82,23.82,0,0,0,416,472V152H96Zm32-288H384V464H128Z"></path>
 								<rect width="32" height="200" x="168" y="216"></rect>
 								<rect width="32" height="200" x="240" y="216"></rect>
@@ -106,11 +141,18 @@ function buy(id) {
 					</div>
 				</div>
 			</div>
-            </li>
+        </div>
             
-            `)
-            
+            `
+        
+    )
 }
+// function hesabla() {
+//     basketArr.forEach(item =>{
+//         umumiqiymet += Number(item.qiymet.replace(/\s/g, ''));
+//         totalamount.innerHTML = umumiqiymet})
+// }
+
 
 function showDet(id) {
     const obj = arr.find(item => item.id == id)

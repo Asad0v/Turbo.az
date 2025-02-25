@@ -7,6 +7,7 @@ module.exports = {
         center: true, // Ortalanmış container
         padding: '2rem', // Daxili padding əlavə et
         screens: {
+          // small: '450px',
           sm: '640px',
           md: '768px',
           lg: '1024px',

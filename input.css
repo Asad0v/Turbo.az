@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* @media (max-width: 440px) { 
+    #basket {
+        width: 100vw;
+        right: -100vw;
+    }
+} */
