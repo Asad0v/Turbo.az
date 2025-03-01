@@ -1,164 +1,270 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Turbo az</title>
     <link rel="stylesheet" href="output.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="input.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 </head>
+
 <body class="bg-gray-100">
-        <div class=" container py-2 flex justify-between text-gray-500 gap-[10px] relative z-[40]">
-            <ul id="sites" class="flex gap-[10px] text-xs md:text-md lg:text-lg  lg:w-[200px] overflow-x-scroll md:overflow-x-visible  sm:w-[120px]">
-                <a target="_blank" href="https://tap.az/"><li class="hover:text-red-500">Tap.az</li></a>
-                <a target="_blank" href="https://bina.az/"><li class="hover:text-red-500">Bina.az</li></a>
-                <a target="_blank" href="https://boss.az/"><li class="hover:text-red-500">Boss.az</li></a>
+    <div id="mobileheader" class="flex justify-between  p-2 md:hidden bg-white border-b-[1px] z-50">
+        <div class="flex gap-[2%] sm:gap-[4%] ">
+            <div class="p-2 text-[1.1em] font-bold uppercase text-red-600"><a href="">Turbo.az</a></div>
+            <div class="p-2 text-[1.1em] font-bold border-l-[3px]  uppercase text-gray-500"><a href="">Tap.az</a></div>
+            <div class="p-2 text-[1.1em] font-bold border-l-[3px]  uppercase text-gray-500"><a href="">Boss.az</a></div>
+        </div>
+        <button onclick="openNewAdMob(true)" class="flex justify-center items-center cursor-pointer">
+            <i class="fa-solid fa-circle-plus text-red-800 text-[1.5em]"></i>
+        </button>
+    </div>
+    <div class="flex flex-wrap p-2 gap-[2%] md:hidden fixed top-[-200px] z-20    0 transition-all duration-1000"
+        id="yenielanmobile">
+        <input class="markaInp w-[49%] rounded-md p-1" type="text" placeholder="Marka">
+        <input class="modelInp w-[49%] rounded-md p-1" type="text" placeholder="Model">
+        <input class="qiymetInp w-[49%] rounded-md mt-1 p-1" type="number" placeholder="Qiymət">
+        <input class="matorInp w-[49%] rounded-md mt-1 p-1" type="number" placeholder="Mator (sm3)">
+        <input class="ilInp w-[49%] rounded-md mt-1 p-1" type="number" placeholder="il">
+        <input class="rengInp w-[49%] rounded-md mt-1 p-1" type="text" placeholder="Rəng">
+        <input class="imgInp w-full rounded-md mt-1 p-1" type="text" placeholder="img">
+        <button onclick="openNewAdMob(false)" class="w-[14%] bg-black text-white rounded-md p-1 mt-2">Gizlət</button>
+        <button onclick="newElan()" class="w-[84%] mt-2 bg-red-700 p-1 text-white rounded-md ">Əlavə Et</button>
+    </div>
+    <div id="filtsecmob" class="bg-gray-100 p-2 px-3 md:hidden transition-all duration-[800ms]">
+        <select style="text-align-last:left ;" class="bg-white border-b-2 rounded-lg w-full h-[50px] text-gray-500  "
+            onchange="markaFilter()" id="automarkamobile">
+
+        </select>
+        <div class="p-2 bg-white rounded-lg flex gap-[1%] justify-start items-center  ">
+            <i class="fa-solid fa-sliders text-red-600 "></i>
+            <p>Filrler</p>
+        </div>
+    </div>
+    <div class=" container py-2  justify-between text-gray-500 gap-[10px] relative z-[40] hidden md:flex">
+        <ul id="sites"
+            class="flex gap-[10px] text-xs md:text-md lg:text-lg  lg:w-[200px] overflow-x-scroll md:overflow-x-visible  sm:w-[120px]">
+            <a target="_blank" href="https://tap.az/">
+                <li class="hover:text-red-500">Tap.az</li>
+            </a>
+            <a target="_blank" href="https://bina.az/">
+                <li class="hover:text-red-500">Bina.az</li>
+            </a>
+            <a target="_blank" href="https://boss.az/">
+                <li class="hover:text-red-500">Boss.az</li>
+            </a>
+        </ul>
+        <ul class="flex items-center gap-[20px] text-xs md:text-md lg:text-[15px]">
+            <li class="hover:text-red-500 hidden md:block ">Dəstək: (012) 505-77-55</li>
+            <li class="hover:text-red-500">Yardım</li>
+            <li class="hover:text-red-500">
+                <select class="bg-gray-100" name="" id="">
+                    <option>RU</option>
+                    <option>AZ</option>
+                    <option>EN</option>
+                </select>
+            </li>
+            <li class="hover:text-red-500"> <i class="fa-solid fa-heart"></i> Seçilmişlər</li>
+            <li class="hover:text-red-500"><i class="fa-solid fa-user"></i> Giriş</li>
+        </ul>
+    </div>
+
+    <div class="p-2 bg-red-700   relative z-[60] hidden md:flex">
+        <div class="container flex justify-between h-16 mx-auto">
+            <ul
+                class="items-stretch hidden space-x-3 md:flex gap-[3%] text-white text-xs md:text-md lg:text-base whitespace-nowrap ">
+                <a onclick="printCards()" href="" class="py-5 uppercase text-2xl font-bold ">
+                    <li>Turbo.az</li>
+                </a>
+                <li class="py-6"><a class="hover:text-red-200" href="">Bütün elanlar</a></li>
+                <li class="py-6"><a class="hover:text-red-200" href="">Avtosalonlar</a></li>
+                <li class="py-6"><a class="hover:text-red-200" href="">Moto</a></li>
+                <li class="py-6"><a class="hover:text-red-200" href="">Ehtiyyat hissələr və aksesuarlar</a></li>
             </ul>
-            <ul class="flex items-center gap-[20px] text-xs md:text-md lg:text-[15px]">
-                <li class="hover:text-red-500 hidden md:block ">Dəstək: (012) 505-77-55</li>
-                <li class="hover:text-red-500">Yardım</li>
-                <li class="hover:text-red-500">
-                    <select class="bg-gray-100" name="" id="">
-                        <option>RU</option>
-                        <option>AZ</option>
-                        <option>EN</option>
-                    </select>
-                </li>
-                <li  class="hover:text-red-500"> <i class="fa-solid fa-heart"></i> Seçilmişlər</li>
-                <li class="hover:text-red-500"><i class="fa-solid fa-user"></i> Giriş</li>
+
+            <div class="flex items-center md:space-x-4 gap-2">
+                <div class="relative">
+                    <input id="inp" oninput="printFilter()" type="search" name="Search" placeholder="Search..."
+                        class="w-[60px] py-2 pl-4 text-sm rounded-md sm:w-[80px] xl:w-[120px] focus:outline-none dark:bg-gray-100 dark:text-gray-800 ">
+
+                </div>
+                <button onclick="openNewAd(true)" type="button"
+                    class="hidden px-3 md:h-[70px]  lg:h-[50px] font-semibold rounded md:block dark:bg-lime-500 dark:text-gray-50 text-[.9em] ">+
+                    Yeni elan</button>
+                <i onclick="openBasket(true)"
+                    class="fa-solid fa-basket-shopping text-2xl text-white cursor-pointer"></i>
+            </div>
+            <button onclick="handleToggler(true)" title="Open menu" type="button" class="p-4 md:hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                    class="w-6 h-6 dark:text-gray-800">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                    </path>
+                </svg>
+            </button>
+        </div>
+        <div id="basket"
+            class="h-screen bg-red-700 w-[30vw] fixed z-50 top-0  right-[-30vw] transition-all  duration-500">
+            <i onclick="openBasket(false)" class="fa-solid fa-x text-white p-5 text-2xl cursor-pointer"></i>
+            <div id="shoppingList" class="flex flex-col divide-y dark:divide-gray-700 h-[550px] overflow-y-scroll">
+
+            </div>
+            <div class="space-y-1 text-right">
+                <p>Total amount:
+                    <span id="totalamount" class="font-semibold"></span>
+                </p>
+                <p class="text-sm dark:text-gray-600">Not including taxes and shipping costs</p>
+            </div>
+            <div class="flex justify-end space-x-4">
+                <button type="button" class="px-6 py-2 border rounded-md dark:border-violet-600">Back
+                    <span class="sr-only sm:not-sr-only">to shop</span>
+                </button>
+                <button type="button"
+                    class="px-6 py-2 border rounded-md dark:bg-violet-600 dark:text-gray-50 dark:border-violet-600">
+                    <span class="sr-only sm:not-sr-only">Continue to</span>Checkout
+                </button>
+            </div>
+        </div>
+
+
+        <div id="navbartoggler"
+            class="h-screen bg-black w-[30vw] fixed z-50 top-0 right-[-30vw] transition-all  duration-500">
+            <i onclick="handleToggler(false)" class="fa-solid fa-x text-white p-5 text-2xl"></i>
+            <ul class="w-[100%] text-white sm:text-sm md:text-xl lg:text-2xl">
+                <li class="text-center "><a href="index.htm"
+                        class="py-5 px-2 uppercase  font-bold  text-red-900">Turbo.az</a></li>
+                <li class="p-2 md:p-4  "><a href="">Bütün elanlar</a></li>
+                <li class="p-2 md:p-4  "><a href="">Avtosalonlar</a></li>
+                <li class="p-2 md:p-4  "><a href="">Moto</a></li>
+                <li class="p-2 md:p-4  "><a href="">Ehtiyyat hissələr və aksesuarlar</a></li>
             </ul>
         </div>
-        
-            <div class="p-2 bg-red-700   relative z-[60]">
-                <div class="container flex justify-between h-16 mx-auto">
-                    <ul class="items-stretch hidden space-x-3 lg:flex gap-5 text-white text-xs md:text-md lg:text-base whitespace-nowrap ">
-                        <a onclick="printCards()" href="" class="py-5 uppercase text-2xl font-bold "><li >Turbo.az</li></a>
-                        <li class="py-6"><a class="hover:text-red-200" href="">Bütün elanlar</a></li>
-                        <li class="py-6"><a class="hover:text-red-200" href="">Avtosalonlar</a></li>
-                        <li class="py-6"><a class="hover:text-red-200" href="">Moto</a></li>
-                        <li class="py-6"><a class="hover:text-red-200" href="">Ehtiyyat hissələr və aksesuarlar</a></li>
-                    </ul>
-                    
-                    <div class="flex items-center md:space-x-4 gap-2">
-                        <div class="relative">
-                            <!-- <div class=" dark:bg-gray-100 dark:text-gray-800  rounded-md  "> -->
-                                <input id="inp" oninput="printFilter()" type="search" name="Search" placeholder="Search..." class="w-[60px] py-2 pl-4 text-sm rounded-md sm:w-[80px] xl:w-[120px] focus:outline-none dark:bg-gray-100 dark:text-gray-800 ">
-                                <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
-                            <!-- </div> -->
-                        </div>
-                        <button onclick="openNewAd(true)"  type="button" class="hidden px-3 md:h-[100px]  lg:h-[50px] font-semibold rounded lg:block dark:bg-lime-500 dark:text-gray-50 text-[.9em] ">+ Yeni elan</button>
-                        <i onclick="openBasket(true)" class="fa-solid fa-basket-shopping text-2xl text-white cursor-pointer"></i>
+    </div>
+    <div class="bg-gray-100 w-full">
+        <div id="yenielan"
+            class="bg-gray-100  py-2 font-sans  fixed z-10  top-[-150px] left-1/2 transform -translate-x-1/2 w-full max-w-[800px] text-center transition-all duration-[800ms]">
+            <div class="container flex justify-center items-center gap-2">
+                <div class="flex flex-col gap-3">
+                    <div class="flex gap-3">
+                        <input placeholder="Marka" type="text" class="markaInp w-[30%] px-1 rounded-md h-[40px]">
+                        <input placeholder="Qiymət" type="number" class="qiymetInp w-[30%] rounded-md px-1 h-[40px]">
+                        <input placeholder="İL" type="number" class="ilInp w-[30%] h-[40px] rounded-md px-1">
+                        <input placeholder="img" type="text" class="imgInp w-[30%] h-[40px] rounded-md px-1">
                     </div>
-                    <button onclick="handleToggler(true)" title="Open menu" type="button" class="p-4 lg:hidden">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6 dark:text-gray-800">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                    </button>
+                    <div class="flex gap-3">
+                        <input placeholder="Model" type="text" class="modelInp w-[30%] px-1 rounded-md h-[40px]">
+                        <input placeholder="Mator (sm3)" type="number"
+                            class="matorInp w-[30%] rounded-md px-1 h-[40px]">
+                        <input placeholder="Rəng" type="text" class="rengInp w-[30%] h-[40px] rounded-md px-1">
+                        <button onclick="newElan()" class="bg-red-700 text-white w-[30%] rounded-md">Əlavə Et <span
+                                class="text-white px-1"><i class="fa fa-check"></i></span></button>
+                    </div>
                 </div>
-                    <div id="basket" class="h-screen bg-red-700 w-[30vw] fixed z-50 top-0  right-[-30vw] transition-all  duration-500">
-                        <i onclick="openBasket(false)" class="fa-solid fa-x text-white p-5 text-2xl cursor-pointer"></i>
-                        <div id="shoppingList" class="flex flex-col divide-y dark:divide-gray-700 h-[550px] overflow-y-scroll">
-                            
-                        </div>
-                        <div class="space-y-1 text-right">
-                            <p>Total amount:
-                                <span id="totalamount" class="font-semibold"></span>
-                            </p>
-                            <p class="text-sm dark:text-gray-600">Not including taxes and shipping costs</p>
-                        </div>
-                        <div class="flex justify-end space-x-4">
-                            <button type="button" class="px-6 py-2 border rounded-md dark:border-violet-600">Back
-                                <span class="sr-only sm:not-sr-only">to shop</span>
-                            </button>
-                            <button type="button" class="px-6 py-2 border rounded-md dark:bg-violet-600 dark:text-gray-50 dark:border-violet-600">
-                                <span class="sr-only sm:not-sr-only">Continue to</span>Checkout
-                            </button>
-                        </div>
-                    </div> 
-
-
-                <div id="navbartoggler" class="h-screen bg-black w-[30vw] fixed z-50 top-0 right-[-30vw] transition-all  duration-500">
-                    <i onclick="handleToggler(false)" class="fa-solid fa-x text-white p-5 text-2xl"></i>
-                    <ul class="w-[100%] text-white sm:text-sm md:text-xl lg:text-2xl"> 
-                        <li class="text-center "><a href="index.htm" class="py-5 px-2 uppercase  font-bold  text-red-900">Turbo.az</a></li>
-                        <li class="p-2 md:p-4  "><a  href="">Bütün elanlar</a></li>
-                        <li class="p-2 md:p-4  "><a  href="">Avtosalonlar</a></li>
-                        <li class="p-2 md:p-4  "><a  href="">Moto</a></li>
-                        <li class="p-2 md:p-4  "><a  href="">Ehtiyyat hissələr və aksesuarlar</a></li>
-                    </ul>
+                <div>
+                    <button onclick="openNewAd(false)" class="bg-black text-white p-2 rounded-md">Gizlət</button>
                 </div>
             </div>
-            <div class="bg-gray-100 w-full">
-                <div id="yenielan" class="bg-gray-100  py-2 font-sans  fixed z-10  top-[-110px] left-1/2 transform -translate-x-1/2 w-full max-w-[800px] text-center transition-all duration-[800ms]">
-                    <div class="container flex justify-center items-center gap-2" >
-                        <div class="flex flex-col gap-3">
-                            <div class="flex gap-3">
-                                <input placeholder="Marka" type="text"  id="markaInp" class="w-[30%] px-1 rounded-md h-[40px]">
-                                <input placeholder="Qiymət" type="number"  id="qiymetInp"  class="w-[30%] rounded-md px-1 h-[40px]">
-                                <input placeholder="İL" type="number"  id="ilInp" class="w-[30%] h-[40px] rounded-md px-1 ">
-                                <input placeholder="img" type="text"  id="imgInp" class="w-[30%] h-[40px] rounded-md px-1 ">
-                            </div>
-                            <div class="flex gap-3">
-                                <input placeholder="Model" type="text"  id="modelInp" class="w-[30%] px-1 rounded-md h-[40px]">
-                                <input placeholder="Mator (sm3)" type="number"  id="matorInp"  class="w-[30%] rounded-md px-1 h-[40px]">
-                                <input placeholder="Rəng" type="text"  id="rengInp" class="w-[30%] h-[40px] rounded-md px-1 ">
-                                <button onclick="newElan()" class="bg-red-700 text-white w-[30%] rounded-md">Əlavə Et <span class="text-white px-1"><i class="fa fa-check"></i></span></button>
-                            </div>
-                        </div>
-                        <div>
-                            <button onclick="openNewAd(false)" class="bg-black text-white p-2 rounded-md">Gizlət</button>
-                        </div>
+        </div>
+        <div id="filtsec" class="bg-gray-100 xs:hidden md:flex transition-all duration-[1000ms] ease-in-out  ">
+            <div class="container p-5 flex flex-col gap-[20px] justify-center items-center   ">
+                <div class="flex gap-[10px]">
+                    <select class="bg-white border-2 rounded-lg md:w-[170px] xl:w-[280px] h-[50px] text-gray-500  "
+                        onchange="markaFilter()" id="automarka">
+                    </select>
+                    <select class="bg-white border-2 rounded-lg md:w-[170px] xl:w-[280px] h-[50px] text-gray-500  "
+                        onchange="modelFilter()" id="automodel">
+                    </select>
+                    <div class="flex bg-white rounded-tr-md rounded-br-md ">
+                        <div
+                            class="py-3 px-1 lg:px-3  bg-red-700 text-white rounded-tl-md rounded-bl-md md:w-[70px] w-[90px] text-center md:text-left">
+                            Hamısı</div>
+                        <div class="py-3 px-1 lg:px-3 text-gray-500 md:w-[70px] lg:w-[90px] text-center md:text-left">
+                            Yeni</div>
+                        <div
+                            class="py-3 px-1 lg:px-3  text-gray-500 md:w-[70px] lg:w-[90px] text-center md:text-left  ">
+                            Sürülmüş</div>
+                    </div>
+                    <select class="bg-white border-2 rounded-lg md:w-[180px] xl:w-[280px] h-[50px] text-gray-500  "
+                        onchange="cityFilter()" id="city">
+                    </select>
+                </div>
+                <div class="flex gap-[10px] max-w-[1110px]">
+                    <div class="flex text-gray-500">
+                        <input
+                            class="p-3 bg-white rounded-tl-md rounded-bl border-[1px] md:w-[80px] xl:w-[140px] h-[50px]"
+                            placeholder="Qiymət, min." />
+                        <input
+                            class="p-3 bg-white rounded-tr-md rounded-br border-[1px] md:w-[80px] xl:w-[140px] h-[50px]"
+                            placeholder="maks." />
+                    </div>
+                    <select class="rounded-lg w-[90px] px-3 border-[1px] h-[50px]" id="">
+                        <option class="" value="azn" selected="">AZN</option>
+                        <option class="" value="usd">USD</option>
+                        <option class="" value="eur">EUR</option>
+                    </select>
+                    <div class="flex  gap-[10px]  text-gray-500">
+                        <div class="bg-white rounded-lg flex justify-center items-center p-2 border-[1px] h-[50px] ">
+                            Kredit</div>
+                        <div class="bg-white rounded-lg flex justify-center items-center p-2 border-[1px] h-[50px] ">
+                            Barter</div>
+                    </div>
+                    <select class="rounded-md md:w-[185px] xl:w-[300px] px-3 border-[1px] text-gray-500 h-[50px]"
+                        name="" id="bannovu">
+                    </select>
+                    <div class="flex flex-row text-gray-500 md:gap-[10px] ">
+                        <select class="md:w-[80px] xl:w-[145px]   h-[50px] rounded-lg" id="minil"></select>
+                        <select class="md:w-[80px] xl:w-[145px]  h-[50px] rounded-lg" id="maxil"></select>
                     </div>
                 </div>
-                <div id="filtsec" class="bg-gray-100 xs:hidden md:flex transition-all duration-[1000ms] ease-in-out ">
-                    <div class="container p-5 flex flex-col gap-[20px] justify-center items-center  ">
-                        <div class="flex gap-[10px]">
-                            <select class="bg-white border-2 rounded-lg md:w-[170px] xl:w-[280px] h-[50px] text-gray-500  "  onchange="markaFilter()"  id="automarka">
-                            </select>
-                            <select class="bg-white border-2 rounded-lg md:w-[170px] xl:w-[280px] h-[50px] text-gray-500  "  onchange="modelFilter()"  id="automodel">
-                            </select>
-                            <div class="flex bg-white rounded-tr-md rounded-br-md ">
-                                <div class="py-3 px-1 lg:px-3  bg-red-700 text-white rounded-tl-md rounded-bl-md md:w-[70px] w-[90px] text-center md:text-left">Hamısı</div>
-                                <div class="py-3 px-1 lg:px-3 text-gray-500 md:w-[70px] lg:w-[90px] text-center md:text-left">Yeni</div>
-                                <div class="py-3 px-1 lg:px-3  text-gray-500 md:w-[70px] lg:w-[90px] text-center md:text-left  ">Sürülmüş</div>
-                            </div>
-                            <select class="bg-white border-2 rounded-lg md:w-[180px] xl:w-[280px] h-[50px] text-gray-500  "  onchange="cityFilter()"  id="city">
-                            </select>
-                        </div>
-                        <div class="flex gap-[10px]">
-                            <div class="flex text-gray-500">
-                                <div class="p-3 bg-white rounded-tl-md rounded-bl border-[1px] md:w-[80px] xl:w-[140px] h-[50px]">Qiymet, min</div>
-                                <div class="p-3 bg-white rounded-tr-md rounded-br border-[1px] md:w-[80px] xl:w-[140px] h-[50px]">maks</div>
-                            </div>
-                            <select class="rounded-lg w-[90px] px-3 border-[1px] h-[50px]"  id="">
-                                <option class="" value="azn" selected="">AZN</option>
-                                <option class="" value="usd" >USD</option>
-                                <option class="" value="eur">EUR</option>
-                            </select>
-                            <div class="flex  gap-[10px]  text-gray-500">
-                                <div class="bg-white rounded-lg flex justify-center items-center p-2 border-[1px] h-[50px] ">Kredit</div>
-                                <div class="bg-white rounded-lg flex justify-center items-center p-2 border-[1px] h-[50px] ">Barter</div>
-                            </div>
-                            <select class="rounded-md md:w-[200px] xl:w-[300px] px-3 border-[1px] text-gray-500 h-[50px]"   name="" id="bannovu">
-                            </select>
-                            <div class="flex md:flex-col lg:flex-row text-gray-500 md:gap-[10px] ">
-                                <select class="md:w-[100px] xl:w-[145px]   h-[50px] rounded-lg"  id="minil"></select>
-                                <select class="md:w-[100px] xl:w-[145px]  h-[50px] rounded-lg"  id="maxil"></select>
-                            </div>
-                        </div>
-                    </div>
+            </div>
+        </div>
+    </div>
+    <main class=" bg-white">
+        <div class="w-full ">
+            <p class="text-[1.2em] font-semibold flex gap-1 justify-left items-center pt-3 px-3 lg:px-5"><i style="color: rgb(253, 215, 0);" class="fa-regular fa-gem "></i>Premium Elanlar</p>
+            <div class="swiper mySwiper shadow-lg" >
+                <div class="swiper-wrapper   p-2" id="premiumcards">
+                   
                 </div>
-            </div >
-            <main class="p-3 bg-white">
-                
-                <div id="cards"  class=" flex justify-center items-center container flex-wrap md:gap-[15px] sm:gap-[10px]">
-                    
-                </div>
-                <div class="flex justify-center py-5">
-                    <button id="showBtn" onclick="showMore()" type="button" class="px-6 py-3 text-sm rounded-md hover:underline dark:bg-gray-500 dark:text-red-400">Load more posts...</button>
-                </div>
-            </main>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <!-- <div class="swiper-pagination"></div> -->
+            </div>
+        </div>
+        <div id="cards" class="py-3 flex justify-center items-center container flex-wrap md:gap-[15px] sm:gap-[10px]">
 
-            <script src="main.js"></script>
+        </div>
+        <div class="flex justify-center py-5">
+            <button id="showBtn" onclick="showMore()" type="button"
+                class="px-6 py-3 text-sm rounded-md hover:underline dark:bg-gray-500 dark:text-red-400">Load more
+                posts...</button>
+        </div>
+    </main>
+
+    <script src="main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script type="module">
+        import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs'
+        var swiper = new Swiper(".mySwiper", {
+            slidesPerView: 'auto',
+            spaceBetween: 30,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            keyboard: true,
+            // loop: true,
+        });
+
+    </script>
 </body>
+
 </html>

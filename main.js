@@ -4,6 +4,7 @@ const basket = document.querySelector('#basket');
 const cards = document.querySelector('#cards');
 const inp = document.querySelector('#inp');
 const automarka = document.querySelector('#automarka');
+const automarkamobile = document.querySelector('#automarkamobile');
 const automodel = document.querySelector('#automodel');
 const city = document.querySelector('#city');
 const bannovu = document.querySelector('#bannovu');
@@ -12,15 +13,17 @@ const maxil = document.querySelector('#maxil');
 const totalamount = document.querySelector('#totalamount');
 const heart = document.querySelectorAll('.heart')
 
-const markaInp = document.getElementById('markaInp')
-const qiymetInp = document.getElementById('qiymetInp')
-const ilInp = document.getElementById('ilInp')
-const imgInp = document.getElementById('imgInp')
-const modelInp = document.getElementById('modelInp')
-const matorInp = document.getElementById('matorInp')
-const rengInp = document.getElementById('rengInp')
+const markaInp = document.querySelector('.markaInp');
+const qiymetInp = document.querySelector('.qiymetInp');
+const ilInp = document.querySelector('.ilInp');
+const imgInp = document.querySelector('.imgInp');
+const modelInp = document.querySelector('.modelInp');
+const matorInp = document.querySelector('.matorInp');
+const rengInp = document.querySelector('.rengInp');
 const yenielan = document.getElementById('yenielan')
+const yenielanmobile = document.getElementById('yenielanmobile')
 const filtsec = document.getElementById('filtsec')
+const filtsecmob = document.getElementById('filtsecmob')
 function newElan() {
     const  newData = {
         id: idplus++, status: false, marka: `${markaInp.value}`, qiymet: `${qiymetInp.value}`, model: `${modelInp.value}`, mator: `${matorInp.value}`, il: `${ilInp.value}`, reng: `${rengInp.value}`, img: `${imgInp.value}`
@@ -33,7 +36,7 @@ function newElan() {
     modelInp.value = ""
     qiymetInp.value = ""
     markaInp.value = ""
-    
+    printCards()
 }
 function handleToggler(status) {
     navbartoggler.style.right = status ? '0' : '-30vw'
@@ -41,6 +44,9 @@ function handleToggler(status) {
 function openBasket(status) {
     basket.style.right = status ? '0' : '-30vw'
 
+}function openNewAdMob(status) {
+    yenielanmobile.style.top = status ? '60px' : '-200px'
+    filtsecmob.style.marginTop = status ? '195px' : '0px'
 }
 function openNewAd(status) {
     yenielan.style.top = status ? '122px' : '-110px'
@@ -74,7 +80,7 @@ const azerbaijanCities = [
     "Biləsuvar", "Salyan", "Neftçala", "Hacıqabul", "Göyçay", 
     "Ağsu", "Ucar", "Zərdab", "Sabirabad", "Saatlı"
 ];
-const avtomobilBanNovleri = [ 'Ban novu ',
+const avtomobilBanNovleri = [ ' Ban novu ',
     "Sedan", "Yolsuzluq (SUV)", "Hetçbek", "Kupe", "Kabriolet", 
     "Pikap", "Minivan", "Furqon", "Universal", "Krossover", 
     "Rodster", "Targa", "Fastbek", "Limuzin", "Mikroavtomobil"
@@ -103,7 +109,7 @@ function  makeCity() {
     }
 }
 makeCity()
-const marka = ['Bütün Avtomobillər']
+const marka = ['🚗 Bütün Avtomobillər']
 const model = ['Model']
 function makeOpt() {
     arr.map(item => {
@@ -112,7 +118,11 @@ function makeOpt() {
         }
     })
     for (let i = 0; i < marka.length; i++) {
-        automarka.innerHTML += `<option class=" bg-red-700 text-center text-white">${marka[i]}</option>`
+
+         automarkamobile.innerHTML += `
+        <option class=" bg-red-700 text-center text-white">${marka[i]}</option>`
+        automarka.innerHTML += `
+        <option class=" bg-red-700 text-center text-white">${marka[i]}</option>`
 
     }
     console.log(marka);
@@ -144,7 +154,7 @@ function printCards() {
         <span class="block text-2xl font-bold  uppercase text-black">${item.qiymet} AZN</span>
         <h2 onclick="showDet(${item.id})" class="text-lg font-normal tracking-wide cursor-pointer">${item.marka} ${item.model}</h2>
         </div>
-        <p class="dark:text-gray-800 pb-4 pl-3">${item.il}, ${item.mator}, <span style=" color: ${item.reng};">${item.reng}<span></p>
+        <p class="dark:text-gray-800 pb-4 pl-3">${item.il}, ${item.mator}, <span style=" color: ${item.reng};">${item.reng}</span></p>
         <button onclick="buy(${item.id})" class="mt-[20px] p-[10px] px-[30px] rounded-[10px] transition ease-in-out delay-150 bg-red-500 hover:-translate-y-1 hover:scale-110 hover:bg-red-800 hover:text-white duration-300">AL</button>
 
         </div>`)
@@ -324,7 +334,7 @@ function modelFilter() {
     
     let kod = filterArr.map(item => `<div class=" w-[290px] relative  max-w-xs   rounded-md shadow-md  dark:text-gray-900">
         <img src="${item.img}" alt="" class=" object-cover object-center w-full rounded-tl-md rounded-tr-md h-72 dark:bg-gray-500">
-        <i  onclick="makeHeart(this)" class="heart fa-regular fa-heart absolute right-5 top-5 text-xl text-white cursor-pointer "></i>
+        <i  onclick="makeHeart(this)" class=" heart fa-regular fa-heart absolute right-5 top-5 text-xl text-white cursor-pointer  "></i>
         <div class="mt-2  bg-white  pl-3">
         <span class="block text-2xl font-bold  uppercase text-black">${item.qiymet} AZN</span>
         <h2 onclick="showDet(${item.id})" class="text-lg font-normal tracking-wide">${item.marka} ${item.model}</h2>
@@ -347,3 +357,27 @@ function makeHeart(element) {
     element.style.color = arr.status ? "red" : "white"
 
 }
+const premiumcards = document.getElementById('premiumcards')
+function cheapToExp() {
+     const cheaptoexp = arr.sort((a, b) => parseFloat(b.qiymet) - parseFloat(a.qiymet))
+         console.log(cheaptoexp);
+         let kod = ''
+         cheaptoexp.map(item => kod += `<div class="swiper-slide    relative  max-w-[200px] sm:max-w-[250px]  h-min  rounded-md shadow-md  dark:text-gray-900">
+        <img src="${item.img}" alt="" class=" object-cover object-center w-full  rounded-tl-md rounded-tr-md  dark:bg-gray-500">
+        <i  onclick="makeHeart(this)" class="heart fa-solid fa-heart absolute right-5 top-5 text-xl text-white cursor-pointer "></i>
+        <div class="mt-2  bg-white  pl-3 text-left">
+        <span class="block text-lg font-bold  uppercase text-black">${item.qiymet} AZN</span>
+        <h2 onclick="showDet(${item.id})" class="text-sm font-normal tracking-wide cursor-pointer">${item.marka} ${item.model}</h2>
+        </div>
+        <p class="text-sm dark:text-gray-800 pb-4 pl-3 text-left">${item.il}, ${item.mator}, <span style=" color: ${item.reng};">${item.reng}</span></p>
+        <button onclick="buy(${item.id})" class=" mt-[10px]  px-[10px] rounded-[10px] text-white  transition ease-in-out delay-150 bg-red-500 hover:-translate-y-1 hover:scale-110 hover:bg-red-800 hover:text-white duration-300">al</button>
+
+        </div>`)
+        premiumcards.innerHTML = kod
+    
+    // console.log(arr.filter(item => arr.sort(item.qiymet,item.qiymet) => item.qiymet-item.qiymet));
+    
+    // console.log(arr.sort((a, b) => a - b));
+    
+ }
+ cheapToExp()
