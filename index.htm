@@ -20,9 +20,15 @@
             <div class="p-2 text-[1.1em] font-bold border-l-[3px]  uppercase text-gray-500"><a href="">Tap.az</a></div>
             <div class="p-2 text-[1.1em] font-bold border-l-[3px]  uppercase text-gray-500"><a href="">Boss.az</a></div>
         </div>
-        <button onclick="openNewAdMob(true)" class="flex justify-center items-center cursor-pointer">
-            <i class="fa-solid fa-circle-plus text-red-800 text-[1.5em]"></i>
-        </button>
+        <div class="flex gap-2">
+            <button class="flex  justify-center items-center cursor-pointer">
+                <i onclick="openBasket(true)"
+                    class="fa-solid fa-basket-shopping text-2xl text-gray-200 cursor-pointer"></i>
+            </button>
+            <button onclick="openNewAdMob(true)" class="flex  justify-center items-center cursor-pointer">
+                <i class="fa-solid fa-circle-plus text-red-800 text-[1.5em]"></i>
+            </button>
+        </div>
     </div>
     <div class="flex flex-wrap p-2 gap-[2%] md:hidden fixed top-[-200px] z-20    0 transition-all duration-1000"
         id="yenielanmobile">
@@ -38,7 +44,7 @@
     </div>
     <div id="filtsecmob" class="bg-gray-100 p-2 px-3 md:hidden transition-all duration-[800ms]">
         <select style="text-align-last:left ;" class="bg-white border-b-2 rounded-lg w-full h-[50px] text-gray-500  "
-            onchange="markaFilter()" id="automarkamobile">
+            onchange="markaFilter(event)" id="automarkamobile">
 
         </select>
         <div class="p-2 bg-white rounded-lg flex gap-[1%] justify-start items-center  ">
@@ -107,28 +113,7 @@
                 </svg>
             </button>
         </div>
-        <div id="basket"
-            class="h-screen bg-red-700 w-[30vw] fixed z-50 top-0  right-[-30vw] transition-all  duration-500">
-            <i onclick="openBasket(false)" class="fa-solid fa-x text-white p-5 text-2xl cursor-pointer"></i>
-            <div id="shoppingList" class="flex flex-col divide-y dark:divide-gray-700 h-[550px] overflow-y-scroll">
 
-            </div>
-            <div class="space-y-1 text-right">
-                <p>Total amount:
-                    <span id="totalamount" class="font-semibold"></span>
-                </p>
-                <p class="text-sm dark:text-gray-600">Not including taxes and shipping costs</p>
-            </div>
-            <div class="flex justify-end space-x-4">
-                <button type="button" class="px-6 py-2 border rounded-md dark:border-violet-600">Back
-                    <span class="sr-only sm:not-sr-only">to shop</span>
-                </button>
-                <button type="button"
-                    class="px-6 py-2 border rounded-md dark:bg-violet-600 dark:text-gray-50 dark:border-violet-600">
-                    <span class="sr-only sm:not-sr-only">Continue to</span>Checkout
-                </button>
-            </div>
-        </div>
 
 
         <div id="navbartoggler"
@@ -143,6 +128,28 @@
                 <li class="p-2 md:p-4  "><a href="">Ehtiyyat hissələr və aksesuarlar</a></li>
             </ul>
         </div>
+    </div>
+    <div id="basket"
+        class="flex flex-col h-screen bg-red-700 sm:w-[40vw] w-full fixed z-[122] top-0  right-[-100%] sm:right-[-40vw] transition-all  duration-500">
+        <i onclick="openBasket(false)" class="fa-solid fa-x text-white p-5 text-2xl cursor-pointer"></i>
+        <div id="shoppingList" class="flex flex-col divide-y dark:divide-gray-700 h-[550px] overflow-y-scroll">
+
+        </div>
+        <div class="space-y-1 text-right">
+            <p>Total amount:
+                <span id="totalamount" class="font-semibold"></span>
+            </p>
+            <p class="text-sm dark:text-gray-600">Not including taxes and shipping costs</p>
+        </div>
+        <!-- <div class="flex justify-end space-x-4">
+                <button type="button" class="px-6 py-2 border rounded-md dark:border-violet-600">Back
+                    <span class="sr-only sm:not-sr-only">to shop</span>
+                </button>
+                <button type="button"
+                    class="px-6 py-2 border rounded-md dark:bg-violet-600 dark:text-gray-50 dark:border-violet-600">
+                    <span class="sr-only sm:not-sr-only">Continue to</span>Checkout
+                </button>
+            </div> -->
     </div>
     <div class="bg-gray-100 w-full">
         <div id="yenielan"
@@ -173,7 +180,7 @@
             <div class="container p-5 flex flex-col gap-[20px] justify-center items-center   ">
                 <div class="flex gap-[10px]">
                     <select class="bg-white border-2 rounded-lg md:w-[170px] xl:w-[280px] h-[50px] text-gray-500  "
-                        onchange="markaFilter()" id="automarka">
+                        onchange="markaFilter(event)" id="automarka">
                     </select>
                     <select class="bg-white border-2 rounded-lg md:w-[170px] xl:w-[280px] h-[50px] text-gray-500  "
                         onchange="modelFilter()" id="automodel">
@@ -225,10 +232,11 @@
     </div>
     <main class=" bg-white">
         <div class="w-full ">
-            <p class="text-[1.2em] font-semibold flex gap-1 justify-left items-center pt-3 px-3 lg:px-5"><i style="color: rgb(253, 215, 0);" class="fa-regular fa-gem "></i>Premium Elanlar</p>
-            <div class="swiper mySwiper shadow-lg" >
+            <p class="text-[1.2em] font-semibold flex gap-1 justify-left items-center pt-3 px-3 lg:px-5"><i
+                    style="color: rgb(253, 215, 0);" class="fa-regular fa-gem "></i>Premium Elanlar</p>
+            <div class="swiper mySwiper shadow-lg">
                 <div class="swiper-wrapper   p-2" id="premiumcards">
-                   
+
                 </div>
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>
@@ -245,6 +253,7 @@
         </div>
     </main>
 
+    <script src="data.js"></script>
     <script src="main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script type="module">
