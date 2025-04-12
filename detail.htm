@@ -18,7 +18,7 @@
     const params = new URLSearchParams(query)
     const id = params.get('id')
     const obj = arr.find(item => item.id == id)
-    console.log(obj);
+        
     cardDet.innerHTML += `
                         <section class="">
                         <h2 class="px-8 py-3 text-black text-xl font-bold">${obj.marka} ${obj.model}, ${obj.il}, ${obj.mator}, ${obj.reng}</h2>

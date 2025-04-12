@@ -140,7 +140,7 @@ function printCards() {
         .slice(0, cardsNum)
         .map(item => kod += `<div class="mt-[20px] sm:mt-0 sm:w-[255px]  md:w-[290px] relative  max-w-xs   rounded-md shadow-md  dark:text-gray-900">
         <img src="${item.img}" alt="" class=" object-cover object-center w-full rounded-tl-md rounded-tr-md h-72 dark:bg-gray-500">
-        <i  onclick="makeHeart(this)" class="heart fa-solid fa-heart absolute right-5 top-5 text-xl text-white cursor-pointer "></i>
+        <i  onclick="makeHeart(this, ${item.id})" class="heart fa-solid fa-heart absolute right-5 top-5 text-xl text-white cursor-pointer "></i>
         <div class="mt-2  bg-white  pl-3">
         <span class="block text-2xl font-bold  uppercase text-black">${item.qiymet} AZN</span>
         <h2 onclick="showDet(${item.id})" class="text-lg font-normal tracking-wide cursor-pointer">${item.marka} ${item.model}</h2>
@@ -239,7 +239,8 @@ function printBasket(){
 
 
 function showDet(id) {
-    window.location.href = `http://127.0.0.1:5500/detail.htm?id=${id}`
+    // window.location.href = `http://127.0.0.1:5500/detail.htm?id=${id}`
+    window.location.href = `https://turboaz-byrashid.vercel.app/?id=${id}`
 
     // const obj = arr.find(item => item.id == id)
     // console.log(obj);
@@ -279,7 +280,7 @@ function markaFilter(event) {
     }
     
     const filterArr = arr.filter(item => item.marka.toLocaleLowerCase().includes(selectedValue.toLocaleLowerCase()));
-    console.log(filterArr);
+    // console.log(filterArr);
 
     let kod = filterArr.map(item => `
         <div class=" w-[290px] relative  max-w-xs   rounded-md shadow-md  dark:text-gray-900">
@@ -324,9 +325,24 @@ function showMore() {
     printCards()
 }
 
-function makeHeart(element) {
+
+
+function makeHeart(element, id) {
     arr.status = !arr.status
     element.style.color = arr.status ? "red" : "white"
+
+
+
+    const favList = JSON.parse(localStorage.getItem('favList')) || []
+
+    const isElementExists = favList.some(item =>item.id == id) 
+    if(!isElementExists){
+        const favelement = arr.find(item => item.id == id)
+        favList.push(favelement)
+        
+        localStorage.setItem('favList', JSON.stringify(favList))
+
+    }else console.warn('Bu element avtomobil elave edilib')
 
 }
 const premiumcards = document.getElementById('premiumcards')
