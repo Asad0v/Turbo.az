@@ -239,8 +239,8 @@ function printBasket(){
 
 
 function showDet(id) {
-    window.location.href = `http://127.0.0.1:5500/detail.htm?id=${id}`
-    // window.location.href = `https://turboaz-byrashid.vercel.app/?id=${id}`
+    // window.location.href = `http://127.0.0.1:5500/detail.htm?id=${id}`
+    window.location.href = `https://turboaz-byrashid.vercel.app/detail.htm?id=${id}`
 
     // const obj = arr.find(item => item.id == id)
     // console.log(obj);
